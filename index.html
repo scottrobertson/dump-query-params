@@ -6,18 +6,23 @@
           ,i =-1;
       while(++i<qArr.length) {
               qfrag = qArr[i].split('=');
-              qObj[qfrag[0]] = qfrag[1];
+              if (qfrag[0]) {
+                qObj[qfrag[0]] = qfrag[1];
+              }
      }
      return qObj;
   };
 
   var queryObj = location.search.substr(1).q2obj();
-  
+  var keys = Object.keys(queryObj)
+
   document.write('<h3>Query Params</h3>');
-  Object.keys(queryObj).map(function(objectKey, index) {
-      var value = queryObj[objectKey];
-      document.write('<b>' + objectKey + '</b>: ' + value);
-  });
+
+  if (keys.length > 0) {
+    keys.map(function(objectKey, index) {
+        var value = queryObj[objectKey];
+        document.write('<b>' + objectKey + '</b>: ' + value);
+    });
+  }
 })();
 </script>
-
